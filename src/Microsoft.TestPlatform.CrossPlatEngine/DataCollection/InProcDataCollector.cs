@@ -69,7 +69,7 @@ namespace Microsoft.VisualStudio.TestPlatform.CrossPlatEngine.DataCollection
             var assembly = this.LoadInProcDataCollectorExtension(codeBase);
             this.dataCollectorType =
                 assembly?.GetTypes()
-                    .FirstOrDefault(x => x.AssemblyQualifiedName.Equals(assemblyQualifiedName) && interfaceTypeInfo.IsAssignableFrom(x.GetTypeInfo()));
+                .Where(x => x.AssemblyQualifiedName.Equals(assemblyQualifiedName) && interfaceTypeInfo.IsAssignableFrom(x.GetTypeInfo()))?.FirstOrDefault();
 
             this.AssemblyQualifiedName = this.dataCollectorType?.AssemblyQualifiedName;
         }
